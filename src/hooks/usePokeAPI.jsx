@@ -22,7 +22,7 @@ const usePokeAPI = () => {
 					return response.json();
 				})
 				.then((response) => {
-					setName(response.name)
+					setName(String(response.name).charAt(0).toUpperCase() + String(response.name).slice(1))
 					setNumber(response.id)
 					setImage(response.sprites.front_default)
 				});
