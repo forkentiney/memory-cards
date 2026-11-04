@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import usePokeAPI from './hooks/usePokeAPI.jsx';
+import { usePokeAPI } from './hooks/usePokeAPI.jsx';
 import './styles/App.css'
 import closeButton from './assets/close-filled.svg';
 import helpButton from './assets/help-outlined.svg';
@@ -13,7 +13,10 @@ function Header() {
 	);
 };
 
-function Scoreboard({ highscore, score, }) {
+function Scoreboard() {
+	const [score, setScore] = useState(0);
+	const [highscore, setHighscore] = useState(0);
+
 	return (
 		<ul id="scoreboard" className="flex-centered">
 			<li>High Score: {highscore}</li>
@@ -22,7 +25,8 @@ function Scoreboard({ highscore, score, }) {
 	);
 };
 
-function Card({ name, number, image, }) {
+function Card() {
+	const { name, number, image } = usePokeAPI();
 	return (
 		<button className="card flex-centered column">
 			<img src={image} alt={name} />
@@ -36,49 +40,18 @@ function Card({ name, number, image, }) {
 
 
 function Gameboard() {
-	const [items, setItems] = useState([]);
-	const getRandomNumber = (min, max) => {
-		min = Math.ceil(min);
-		max = Math.floor(max);
-		return Math.floor(Math.random() * (max - min)) + min;
-	};
-
-	for (let i = 0; i < 9; i++) {
-		const id = getRandomNumber();
-		const pokemon = usePokeAPI(id);
-		setItems(...items, pokemon);
-	};
-
-	//useEffect(() => {
-	//	const fetchPokemon = async () => {
-	//		const getRandomNumber = (min, max) => {
-	//			min = Math.ceil(min);
-	//			max = Math.floor(max);
-	//			return Math.floor(Math.random() * (max - min)) + min;
-	//		};
-	//		for (let i = 0; i < 9; i++) {
-	//			const pokemonNumber = getRandomNumber(1, 150);
-	//			const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonNumber}`);
-	//			const newItem = await response.json();
-	//			setItems([...items, newItem]);
-	//		};
-	//	};
-
-	//	fetchPokemon();
-	//}, []);
-
-	console.log(items);
-	const cards = items.map(item => {
-		<Card
-			key={item.id}
-			name={item.name}
-			number={item.id}
-			image={item.sprites.front_default}
-		/>
-	});
-
 	return (
-		<div id="gameboard" className="flex-centered">{cards}</div>
+		<div id="gameboard" className="flex-centered">
+			<Card />
+			<Card />
+			<Card />
+			<Card />
+			<Card />
+			<Card />
+			<Card />
+			<Card />
+			<Card />
+		</div>
 	);
 };
 
