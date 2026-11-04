@@ -5,9 +5,112 @@
     <link rel="icon" type="image" href="/fav.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Severud | Memory Cards</title>
+		<link rel="stylesheet" href="./src/styles/index.css">
+		<link rel="stylesheet" href="./src/styles/reset.css">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+			<header class="flex-centered">
+				<h1>Pokémon Memory Cards</h1>
+			</header>
+			<main class="flex-centered column">
+				<ul id="scoreboard" class="flex-centered">
+					<li>High Score:</li>
+					<li>Score:</li>
+				</ul>
+				<button id="open-manual" class="flex-centered"><img src="./src/assets/help-outlined.svg" alt="" aria-label="Help"></button>
+				<div id="gameboard" class="flex-centered">
+					<button class="card flex-centered column">
+						<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png" alt="Pokémon Name">
+						<div class="card-info flex-centered">
+							<p>No. 006</p>
+							<h3>Charizard</h3>
+						</div>
+					</button>
+					<button class="card flex-centered column">
+						<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png" alt="Pokémon Name">
+						<div class="card-info flex-centered">
+							<p>No. 006</p>
+							<h3>Charizard</h3>
+						</div>
+					</button>
+					<button class="card flex-centered column">
+						<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png" alt="Pokémon Name">
+						<div class="card-info flex-centered">
+							<p>No. 006</p>
+							<h3>Charizard</h3>
+						</div>
+					</button>
+					<button class="card flex-centered column">
+						<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png" alt="Pokémon Name">
+						<div class="card-info flex-centered">
+							<p>No. 006</p>
+							<h3>Charizard</h3>
+						</div>
+					</button>
+					<button class="card flex-centered column">
+						<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png" alt="Pokémon Name">
+						<div class="card-info flex-centered">
+							<p>No. 006</p>
+							<h3>Charizard</h3>
+						</div>
+					</button>
+					<button class="card flex-centered column">
+						<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png" alt="Pokémon Name">
+						<div class="card-info flex-centered">
+							<p>No. 006</p>
+							<h3>Charizard</h3>
+						</div>
+					</button>
+					<button class="card flex-centered column">
+						<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png" alt="Pokémon Name">
+						<div class="card-info flex-centered">
+							<p>No. 006</p>
+							<h3>Charizard</h3>
+						</div>
+					</button>
+					<button class="card flex-centered column">
+						<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png" alt="Pokémon Name">
+						<div class="card-info flex-centered">
+							<p>No. 006</p>
+							<h3>Charizard</h3>
+						</div>
+					</button>
+					<button class="card flex-centered column">
+						<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png" alt="Pokémon Name">
+						<div class="card-info flex-centered">
+							<p>No. 006</p>
+							<h3>Charizard</h3>
+						</div>
+					</button>
+				</div>
+				<aside id="manual" class="flex-centered column popup">
+					<button class="close-button" aria-label="Close"><img src="./src/assets/close-filled.svg" alt="" aria-hidden="true"></button>
+					<h2>How to Play</h2>
+					<ul>
+						<li>Cards are displayed in a random order.</li>
+						<li>Each time you click, they are rearranged.</li>
+						<li>Do not click the same card twice.</li>
+						<li>Each unique card clicked earns you a point.</li>
+						<li>Clicking a card you have already clicked resets your score.</li>
+					</ul>
+				</aside>
+			</main>
+			<footer class="flex-centered">
+				<div class="flex-centered column">
+					<p>license</p>
+					<a href="https://github.com/forkentiney/memory-cards/blob/main/LICENSE">GNU GPLv3</a>
+				</div>
+				<div class="flex-centered column">
+					<p>site by Joshua Severud</p>
+					<a href="https://github.com/forkentiney/memory-cards"><img class="icon" src="./src/assets/github.svg" alt="" aria-hidden="true"></a>
+				</div>
+				<div class="flex-centered column">
+					<p>icons by <a href="https://github.com/weui/weui-icon">WeUI</a></p>
+					<p>Pokémon data from <a href="https://pokeapi.co/">PokéAPI</a></p>
+				</div>
+			</footer>
+		</div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
