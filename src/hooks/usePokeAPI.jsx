@@ -1,6 +1,6 @@
 import { useState, useEffect, } from 'react';
 
-export default function usePokeAPI(id) {
+export default function usePokeAPI() {
 	const [item, setItem] = useState(null);
 
 	const getRandomNumber = (min, max) => {
