@@ -72,17 +72,22 @@ button img {
 }
 
 #scoreboard {
+	position: sticky;
+	top: 1em;
+	background-color: var(--bg-pane);
 	font-weight: 600;
 	gap: 1em;
 	list-style: none;
 	padding-left: 0;
+	padding: 1em;
+	border-radius: 8px;
 }
 
 #gameboard {
 	flex-wrap: wrap;
 	gap: 1em;
 	width: clamp(320px, 95vw, 960px);
-	margin: 2em 0 6em 0;
+	margin: 1em 0 6em 0;
 }
 
 #open-manual {
