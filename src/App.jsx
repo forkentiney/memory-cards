@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { usePokeAPI } from './hooks/usePokeAPI.jsx';
 import './styles/App.css'
 import closeButton from './assets/close-filled.svg';
@@ -22,22 +22,23 @@ function Scoreboard({ score, highscore }) {
 	);
 };
 
-function Cards({ setScore, setHighscore }) {
+function Cards({ evaluateClick }) {
 	const { pokemon, fetchRandomPokemon } = usePokeAPI(9);
-
-	function handleClick() {
+	
+	const handleCardClick = event => {
+		const card = event.target.dataset.id;
+		evaluateClick(card);
 		fetchRandomPokemon();
-
 	};
 
 	return (
 		<>
 		{pokemon.map((mon) => (
-			<button key={mon.number} onClick={handleClick} className="card flex-centered column">
-				<img src={mon.image} alt={mon.name} />
-				<div className="card-info flex-centered">
-					<p>No. {mon.number}</p>
-					<h3>{mon.name}</h3>
+			<button key={mon.number} data-id={mon.number} onClick={handleCardClick} className="card flex-centered column">
+				<img data-id={mon.number} src={mon.image} alt={mon.name} />
+				<div data-id={mon.number} className="card-info flex-centered">
+					<p data-id={mon.number}>No. {mon.number}</p>
+					<h3 data-id={mon.number}>{mon.name}</h3>
 				</div>
 			</button>
 		))}
@@ -45,9 +46,25 @@ function Cards({ setScore, setHighscore }) {
 	);
 };
 
-function Gameboard() {
+function Gameboard({ score, setScore, highscore, setHighscore }) {
+	const [clickedCards, setClickedCards] = useState([]);
+	
+	const evaluateClick = (card) => {
+		if (!clickedCards.includes(card)) {
+			setClickedCards([...clickedCards, card]);
+			setScore(score + 1);
+		} else {
+			setScore(0);
+			setClickedCards([]);
+		};
+
+		if (highscore <= score) {
+			setHighscore(score + 1);
+		};
+	};
+
 	return (
-		<div id="gameboard" className="flex-centered"><Cards /></div>
+		<div id="gameboard" className="flex-centered"><Cards evaluateClick={evaluateClick} /></div>
 	);
 };
 
