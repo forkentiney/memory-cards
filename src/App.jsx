@@ -105,8 +105,8 @@ function Loser({ toggleLose, name }) {
 			<h2>Game Over!</h2>
 			<p>You lost by clicking {name} twice.</p>
 		</aside>
-	)
-}
+	);
+};
 
 function Footer() {
 	return (
