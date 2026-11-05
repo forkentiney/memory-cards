@@ -1,16 +1,11 @@
-# React + Vite
+# Pokemon Memory Cards
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+This is a memory game using Pokémon. Your goal is to click as many unique cards as you can. 
 
-Currently, two official plugins are available:
+I feel like I did a much better job of organizing the code on this one compared to my previous work with React. I am happy with how things turned out here, and managed to learn something about custom hooks along the way.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+In terms of gameplay, right now it's easy to just spam one card and get a score of like ~20-25 without trying. It might be better to say break up the Pokédex into sets of 9-18 and have you clear those without repeating a Pokémon before being able to see the next set. Maybe the next set could be added to the previous sets for a harder difficulty. I don't know. For now, it works as intended and I'm happy with how the writing went. 
 
-## React Compiler
+In terms of UX design, it's not obvious when you lose. I think adding a popup that explains what card you clicked twice would be good. 
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+<img width="1482" height="1519" alt="Screenshot_20261105_151956" src="https://github.com/user-attachments/assets/bdfbb019-dd65-46b2-ad6a-74250b286444" />
