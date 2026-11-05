@@ -26,6 +26,7 @@ function Cards({ setScore, setHighscore }) {
 	const { pokemon, fetchRandomPokemon } = usePokeAPI(9);
 
 	function handleClick() {
+		fetchRandomPokemon();
 
 	};
 
