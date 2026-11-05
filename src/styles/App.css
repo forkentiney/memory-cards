@@ -136,7 +136,7 @@ button img {
 	transform: translate(-50%, 0);
 	background-image: linear-gradient(180deg, var(--overlay-light) 0%, var(--overlay-medium) 6%);
 	color: var(--text-dark);
-	padding: 1em;
+	padding: 1em 1em 2em 1em;
 	border-radius: 8px;
 	border: 2px solid var(--yellow);
 	box-shadow: 4px 4px 16px black;

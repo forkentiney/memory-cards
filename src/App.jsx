@@ -26,19 +26,18 @@ function Cards({ evaluateClick }) {
 	const { pokemon, fetchRandomPokemon } = usePokeAPI(9);
 	
 	const handleCardClick = event => {
-		const card = event.target.dataset.id;
-		evaluateClick(card);
+		evaluateClick(event.target.dataset.id, event.target.dataset.name);
 		fetchRandomPokemon();
 	};
 
 	return (
 		<>
 		{pokemon.map((mon) => (
-			<button key={mon.number} data-id={mon.number} onClick={handleCardClick} className="card flex-centered column">
-				<img data-id={mon.number} src={mon.image} alt={mon.name} />
-				<div data-id={mon.number} className="card-info flex-centered">
-					<p data-id={mon.number}>No. {mon.number}</p>
-					<h3 data-id={mon.number}>{mon.name}</h3>
+			<button key={mon.number} data-id={mon.number} data-name={mon.name} onClick={handleCardClick} className="card flex-centered column">
+				<img data-id={mon.number} data-name={mon.name} src={mon.image} alt={mon.name} />
+				<div data-id={mon.number} data-name={mon.name} className="card-info flex-centered">
+					<p data-id={mon.number} data-name={mon.name}>No. {mon.number}</p>
+					<h3 data-id={mon.number} data-name={mon.name}>{mon.name}</h3>
 				</div>
 			</button>
 		))}
@@ -48,14 +47,16 @@ function Cards({ evaluateClick }) {
 
 function Gameboard({ score, setScore, highscore, setHighscore }) {
 	const [clickedCards, setClickedCards] = useState([]);
+	const [lost, setLost] = useState(null);
 	
-	const evaluateClick = (card) => {
+	const evaluateClick = (card, name) => {
 		if (!clickedCards.includes(card)) {
 			setClickedCards([...clickedCards, card]);
 			setScore(score + 1);
 		} else {
 			setScore(0);
 			setClickedCards([]);
+			setLost(name);
 		};
 
 		if (highscore <= score) {
@@ -63,12 +64,21 @@ function Gameboard({ score, setScore, highscore, setHighscore }) {
 		};
 	};
 
+	function toggleLose() {
+		if (lost) setLost(null);
+	};
+
 	return (
-		<div id="gameboard" className="flex-centered"><Cards evaluateClick={evaluateClick} /></div>
+		<div id="gameboard" className="flex-centered">
+			<Cards
+				evaluateClick={evaluateClick}
+			/>
+			{lost ? <Loser name={lost} toggleLose={toggleLose} /> : null}
+		</div>
 	);
 };
 
-function Manual({ toggleHelp, }) {
+function Manual({ toggleHelp }) {
 	return (
 		<aside id="manual" className="flex-centered column popup">
 			<button onClick={toggleHelp} className="close-button" aria-label="Close">
@@ -85,6 +95,18 @@ function Manual({ toggleHelp, }) {
 		</aside>
 	);
 };
+
+function Loser({ toggleLose, name }) {
+	return (
+		<aside id="loser-dialogue" className="flex-centered column popup">
+			<button onClick={toggleLose} className="close-button" aria-label="Close">
+				<img src={closeButton} alt="" aria-hidden="true" />
+			</button>
+			<h2>Game Over!</h2>
+			<p>You lost by clicking {name} twice.</p>
+		</aside>
+	)
+}
 
 function Footer() {
 	return (
