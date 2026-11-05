@@ -13,10 +13,7 @@ function Header() {
 	);
 };
 
-function Scoreboard() {
-	const [score, setScore] = useState(0);
-	const [highscore, setHighscore] = useState(0);
-
+function Scoreboard({ score, highscore }) {
 	return (
 		<ul id="scoreboard" className="flex-centered">
 			<li>High Score: {highscore}</li>
@@ -25,33 +22,31 @@ function Scoreboard() {
 	);
 };
 
-function Card() {
-	const { name, number, image } = usePokeAPI();
+function Cards({ setScore, setHighscore }) {
+	const { pokemon, fetchRandomPokemon } = usePokeAPI(9);
+
+	function handleClick() {
+
+	};
+
 	return (
-		<button className="card flex-centered column">
-			<img src={image} alt={name} />
-			<div className="card-info flex-centered">
-				<p>No. {number}</p>
-				<h3>{name}</h3>
-			</div>
-		</button>
+		<>
+		{pokemon.map((mon) => (
+			<button key={mon.number} onClick={handleClick} className="card flex-centered column">
+				<img src={mon.image} alt={mon.name} />
+				<div className="card-info flex-centered">
+					<p>No. {mon.number}</p>
+					<h3>{mon.name}</h3>
+				</div>
+			</button>
+		))}
+		</>
 	);
 };
 
-
 function Gameboard() {
 	return (
-		<div id="gameboard" className="flex-centered">
-			<Card />
-			<Card />
-			<Card />
-			<Card />
-			<Card />
-			<Card />
-			<Card />
-			<Card />
-			<Card />
-		</div>
+		<div id="gameboard" className="flex-centered"><Cards /></div>
 	);
 };
 
@@ -94,6 +89,8 @@ function Footer() {
 
 function Main() {
 	const [help, setHelp] = useState(false);
+	const [score, setScore] = useState(0);
+	const [highscore, setHighscore] = useState(0);
 
 	function toggleHelp() {
 		if (help) {
@@ -105,9 +102,17 @@ function Main() {
 
 	return (
 		<main className="flex-centered column">
-			<Scoreboard />
+			<Scoreboard
+				score={score}
+				highscore={highscore}
+			/>
 			<button onClick={toggleHelp} id="open-manual" className="flex-centered"><img src={helpButton} alt="" aria-label="Help" /></button>
-			<Gameboard />
+			<Gameboard 
+				setScore={setScore} 
+				setHighscore={setHighscore}
+				score={score}
+				highscore={highscore}
+			/>
 			{help ? <Manual toggleHelp={toggleHelp}/> : null}
 		</main>
 	)

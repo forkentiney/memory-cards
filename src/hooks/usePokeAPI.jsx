@@ -1,34 +1,41 @@
-import { useState, useEffect, } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
-const usePokeAPI = () => {
-	const [name, setName] = useState(null);
-	const [number, setNumber] = useState(null);
-	const [image, setImage] = useState(null);
-
-	const getRandomNumber = (min, max) => {
-		min = Math.ceil(min);
-		max = Math.floor(max);
-		return Math.floor(Math.random() * (max - min)) + min;
-	};
-
-	const id = getRandomNumber(1, 150);
-
-	useEffect(() => {
-		fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-				.then((response) => {
-					if (response.status >= 400) {
-						throw new Error("server error");
-					}
-					return response.json();
-				})
-				.then((response) => {
-					setName(String(response.name).charAt(0).toUpperCase() + String(response.name).slice(1))
-					setNumber(response.id)
-					setImage(response.sprites.front_default)
-				});
-	}, []);
-
-	return { name, number, image };
+const getRandomNumber = (min, max) => {
+	return Math.floor(Math.random() * (max - min)) + min;
 };
 
-export { usePokeAPI };
+export function usePokeAPI(count = 9) {
+	const [pokemon, setPokemon] = useState([]);
+
+	const fetchRandomPokemon = useCallback(async () => {
+		const ids = [];
+
+		while (ids.length < count) {
+			const id = getRandomNumber(1, 150);
+			if (!ids.includes(id)) ids.push(id);
+		};
+
+		const fetchPokemon = ids.map(id =>
+			fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+				.then((response) => {
+					return response.json();
+			})
+		);
+
+		const results = await Promise.all(fetchPokemon);
+
+		const processedResults = results.map(result => ({
+			number: result.id,
+			name: result.name.charAt(0).toUpperCase() + result.name.slice(1),
+			image: result.sprites.other['official-artwork']['versions']['generation-i']['red-and-blue'].front_default || result.sprites.front_default,
+		}));
+		
+		setPokemon(processedResults);
+	}, [count]);
+
+	useEffect(() => {
+		fetchRandomPokemon();
+	}, [fetchRandomPokemon]);
+
+	return { pokemon, fetchRandomPokemon };
+};
