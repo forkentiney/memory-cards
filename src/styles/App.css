@@ -130,7 +130,7 @@ button img {
 
 .popup {
 	width: clamp(310px, 50vw, 500px);
-	position: absolute;
+	position: fixed;
 	top: 30%;
 	left: 50%;
 	transform: translate(-50%, 0);
