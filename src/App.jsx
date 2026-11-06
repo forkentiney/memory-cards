@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { usePokeAPI } from './hooks/usePokeAPI.jsx';
+import { useLocalValue } from './hooks/useLocalValue.jsx';
 import './styles/App.css'
 import closeButton from './assets/close-filled.svg';
 import helpButton from './assets/help-outlined.svg';
@@ -130,7 +131,7 @@ function Footer() {
 function Main() {
 	const [help, setHelp] = useState(false);
 	const [score, setScore] = useState(0);
-	const [highscore, setHighscore] = useState(0);
+	const [highscore, setHighscore] = useLocalValue(0, 'highscore');
 
 	function toggleHelp() {
 		if (help) {
